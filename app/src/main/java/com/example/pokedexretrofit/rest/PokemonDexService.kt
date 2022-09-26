@@ -19,22 +19,6 @@ interface PokemonDexService {
     @GET("pokemon")
     fun listarPokemon(@Query("limit") limit: Int): Call<PokemonLista>
 
-    companion object{
-
-       private val retrofitService: PokemonDexService by lazy {
-
-            val retrofit = Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-           retrofit.create(PokemonDexService::class.java)
-        }
-
-        fun getInstance() : PokemonDexService {
-            return retrofitService
-        }
-
-    }
 }
 
 

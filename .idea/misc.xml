@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android studio/Projetos Kotlin/pokedex-retrofit-mvvm/app/src/main/res/drawable/txt_form_style.xml" value="0.1415" />
+        <entry key="..\:/Android studio/Projetos Kotlin/pokedex-retrofit-mvvm/app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
+        <entry key="..\:/Android studio/Projetos Kotlin/pokedex-retrofit-mvvm/app/src/main/res/layout/item_pokemon.xml" value="0.2552083333333333" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/PokeDexretrofit/app/src/main/res/drawable/cursor_style.xml" value="0.196" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/PokeDexretrofit/app/src/main/res/drawable/edt_form.xml" value="0.213" />
         <entry key="..\:/Projetos/Projetos Android/Projetos kotlin/PokeDexretrofit/app/src/main/res/drawable/edt_form_style.xml" value="0.196" />
@@ -13,7 +16,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
