@@ -1,8 +1,11 @@
 package com.example.pokedexretrofit.model
 
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedexretrofit.R
@@ -13,8 +16,10 @@ import kotlinx.android.synthetic.main.item_pokemon.view.*
 class PokemonAdapter(private val items: List<Pokemon>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+
     class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(pokemon: Pokemon) {
+
             ItemPokemonBinding.bind(itemView).apply {
                 val numeroFormatado: String = pokemon.id.toString().padStart(3, '0')
                 val imgThumb = "https://www.serebii.net/pokemongo/pokemon/$numeroFormatado.png"
@@ -24,11 +29,18 @@ class PokemonAdapter(private val items: List<Pokemon>) :
                 Glide.with(itemView).load(imgThumb).into(itemView.item_img_pokemon)
 
                 if (pokemon.types.size > 1) {
-                    itemView.item_txt_type1.text = pokemon.types[0].type.name
-                    itemView.item_txt_type2.text = pokemon.types[1].type.name
+                        itemView.item_txt_type1.text = pokemon.types[0].type.name
+                        itemView.item_txt_type2.text = pokemon.types[1].type.name
+
+                        itemView.item_txt_type1.setBackgroundColor(ContextCompat.getColor(itemView.context, ConverterTypes.valueOf(pokemon.types[0].type.name).colorTipo))
+                        itemView.item_txt_type2.setBackgroundColor(ContextCompat.getColor(itemView.context, ConverterTypes.valueOf(pokemon.types[1].type.name).colorTipo))
+
                 } else {
-                    itemView.item_txt_type1.text = pokemon.types[0].type.name
-                    itemView.item_txt_type2.visibility = View.GONE
+                    ConverterTypes.values().forEach {
+                        itemView.item_txt_type1.setBackgroundColor(ContextCompat.getColor(itemView.context, it.colorTipo))
+                        itemView.item_txt_type1.text = pokemon.types[0].type.name
+                        itemView.item_txt_type2.visibility = View.GONE }
+
                 }
             }
         }

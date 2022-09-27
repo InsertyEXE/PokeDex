@@ -51,29 +51,5 @@ class MainActivity : AppCompatActivity() {
                 binding.rvDex.adapter = PokemonAdapter(pokemons)
         })
 
-//        binding.edtDex.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                pokemons.clear()
-//
-//                viewmodel.procurarPokemon(s.toString())
-//                viewmodel.pokemon.observe(this@MainActivity) {
-//
-//                    it?.let {
-//                        pokemons.add(it)
-//                        binding.rvDex.adapter = PokemonAdapter(pokemons)
-//                        rv_dex.adapter?.notifyDataSetChanged()
-//                    }
-//                }
-//            }
-//        })
-
     }
 }
