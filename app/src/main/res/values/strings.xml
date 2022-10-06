@@ -5,4 +5,5 @@
     <string name="height">HEIGHT</string>
     <string name="stats">STATS</string>
     <string name="share">Compartilhar</string>
+    <string name="fb_content_desc">Button to search pokemon</string>
 </resources>

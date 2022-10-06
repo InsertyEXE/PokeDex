@@ -1,23 +1,20 @@
-package com.example.pokedexretrofit.view
+package com.example.pokedexretrofit
 
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import com.example.pokedexretrofit.R
-import com.example.pokedexretrofit.TxTWatcher
 import com.example.pokedexretrofit.databinding.ActivityMainBinding
 import com.example.pokedexretrofit.model.ConverterTypes
 import com.example.pokedexretrofit.model.IMainView
 import com.example.pokedexretrofit.model.Pokemon
 import com.example.pokedexretrofit.model.PokemonAdapter
-import com.example.pokedexretrofit.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.item_dialog_pokemon.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -35,12 +32,11 @@ class MainActivity : AppCompatActivity(), IMainView {
         setContentView(binding.root)
 
         binding.rvDex.layoutManager = GridLayoutManager(this, 2)
+        if (pokemons.isEmpty()) viewmodel.listAllPokemon()
     }
 
     override fun onResume() {
         super.onResume()
-
-        if (pokemons.isEmpty()) viewmodel.listAllPokemon()
 
         viewmodel.pokemon.observe(this) {
             if (!pokemons.contains(it)) pokemons.add(it)
@@ -58,11 +54,12 @@ class MainActivity : AppCompatActivity(), IMainView {
         binding.fbSearch.setOnClickListener {
             if (binding.edtDex.text.toString().isNotEmpty()) {
                 pokemons.clear()
+                binding.rvDex.adapter?.notifyDataSetChanged()
                 viewmodel.fetchPokemon(binding.edtDex.text.toString())
             }
         }
 
-        binding.edtDex.addTextChangedListener(TxTWatcher { if (it.isEmpty()) viewmodel.listAllPokemon() })
+        binding.edtDex.addTextChangedListener { text -> if (text?.isEmpty() == true) viewmodel.listAllPokemon() }
 
     }
 
@@ -108,14 +105,12 @@ class MainActivity : AppCompatActivity(), IMainView {
     }
 
     private fun shareInfo(pokemon: Pokemon) {
-
         val types = arrayListOf<String>()
         val sendIntent = Intent()
-
         if (pokemon.types.size > 1){
             types.add(pokemon.types[0].type.name)
             types.add(pokemon.types[1].type.name)
-        } else { types.add(pokemon.types[0].type.name) }
+        } else types.add(pokemon.types[0].type.name)
 
         val infos = "--- POKEMON INFO ---\n" +
                 "name: ${pokemon.name}\n" +

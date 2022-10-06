@@ -1,4 +1,4 @@
-package com.example.pokedexretrofit.viewmodel
+package com.example.pokedexretrofit
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

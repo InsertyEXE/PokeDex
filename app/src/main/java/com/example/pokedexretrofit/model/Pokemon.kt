@@ -1,7 +1,5 @@
 package com.example.pokedexretrofit.model
 
-import com.example.pokedexretrofit.R
-
 data class Pokemon(
     val id: Int,
     val name: String,
