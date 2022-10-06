@@ -1,34 +1,43 @@
 package com.example.pokedexretrofit.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedexretrofit.model.Pokemon
-import com.example.pokedexretrofit.model.PokemonLista
-import com.example.pokedexretrofit.rest.MainRepository
+import com.example.pokedexretrofit.data.MainRepository
+import com.example.pokedexretrofit.model.IMainView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
-class MainViewModel(private val repository: MainRepository) : ViewModel() {
+class MainViewModel(private val view: IMainView, private val repository: MainRepository) : ViewModel() {
 
     val pokemon = MutableLiveData<Pokemon>()
+    val pokemonQuery = MutableLiveData<Pokemon?>()
 
-    fun listarPokemons() {
+    fun listAllPokemon() {
+        view.showProgress(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val res = repository.listarPokemons().body()
+            val res = repository.listAllPokemon().body()
             res?.results?.let { pokemonList ->
                 pokemonList.forEach { pokemonQuery ->
-                    val pokemonResult = repository.buscarPokemon(pokemonQuery.name).body()
-
+                    val pokemonResult = repository.fetchPokemon(pokemonQuery.name).body()
                     viewModelScope.launch(Dispatchers.Main) {
                         pokemon.value = pokemonResult
+                        view.showProgress(false)
                     }
                 }
+            }
+        }
+    }
+
+    fun fetchPokemon(name: String?){
+        view.showProgress(true)
+        viewModelScope.launch(Dispatchers.IO){
+            val res = repository.fetchPokemon(name).body()
+            viewModelScope.launch(Dispatchers.Main){
+                pokemonQuery.value = res
+                view.showProgress(false)
             }
         }
     }
