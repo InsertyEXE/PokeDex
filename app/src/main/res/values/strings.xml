@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PokeDex retrofit</string>
+    <string name="app_name">PokeDex</string>
     <string name="pesquisa_dex">Nome do pokemon...</string>
     <string name="weight">WEIGHT</string>
     <string name="height">HEIGHT</string>

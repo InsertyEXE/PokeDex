@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity(), IMainView {
 
         viewmodel.pokemon.observe(this) {
             if (!pokemons.contains(it)) pokemons.add(it)
-            binding.rvDex.adapter = PokemonAdapter(pokemons) { pokemon -> openDialogPokemon(pokemon) }
             pokemons.sortBy { pokemon -> pokemon.id }
+            binding.rvDex.adapter = PokemonAdapter(pokemons) { pokemon -> openDialogPokemon(pokemon) }
         }
 
 
