@@ -11,14 +11,19 @@ Essa aplicação foi construida utilizando Coroutines, Retrofit, KOIN, arquitetu
 
 <img src="/preview/imgs.png"/>
 
+## API Pokemon
+<img src="https://user-images.githubusercontent.com/24237865/83422649-d1b1d980-a464-11ea-8c91-a24fdf89cd6b.png" align="left" width="21%"/>
+
+Essa PokeDex utiliza a [PokeApi](<https://pokeapi.co/api/v2/>).
+<p>A PokeApi prove uma interface de RESTful API com bastantes detalhes.</p>
+<br></br>
+
 ## Features
-* API: <https://pokeapi.co/api/v2/>
 * Architecture: MVVM
   * data: Configurações do Retrofit para fazer a requisição a API 
   * di: Configurações da biblitoeca KOIN 
   * model: modelo das classes
 
-  
 * Lenguages:
   * ![Kotlin](https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white) 100%  
 
@@ -30,4 +35,7 @@ Essa aplicação foi construida utilizando Coroutines, Retrofit, KOIN, arquitetu
   * viewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
   * KOIN: "io.insert-koin:koin-android:3.2.0" [Bliblioteca KOIN](<https://insert-koin.io>)
   * coroutines: 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9' & 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+  
+## Try
+App: [Download PokeDex](https://github.com/InsertyEXE/PokeDex/blob/master/PokeDex.apk)
 
