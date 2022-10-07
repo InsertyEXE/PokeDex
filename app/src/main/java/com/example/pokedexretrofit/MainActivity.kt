@@ -1,4 +1,5 @@
 package com.example.pokedexretrofit
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -38,7 +39,8 @@ class MainActivity : AppCompatActivity(), IMainView {
         viewmodel.pokemon.observe(this) {
             if (!pokemons.contains(it)) pokemons.add(it)
             pokemons.sortBy { pokemon -> pokemon.id }
-            binding.rvDex.adapter = PokemonAdapter(pokemons) { pokemon -> openDialogPokemon(pokemon) }
+            binding.rvDex.adapter =
+                PokemonAdapter(pokemons) { pokemon -> openDialogPokemon(pokemon) }
 
         }
 
@@ -46,7 +48,8 @@ class MainActivity : AppCompatActivity(), IMainView {
             pokemons.clear()
             binding.rvDex.adapter?.notifyDataSetChanged()
             pokemonResult?.let { pokemons.add(it) }
-            if (pokemons.isNotEmpty()) binding.rvDex.adapter = PokemonAdapter(pokemons) { openDialogPokemon(it) }
+            if (pokemons.isNotEmpty()) binding.rvDex.adapter =
+                PokemonAdapter(pokemons) { openDialogPokemon(it) }
         }
 
         binding.fbSearch.setOnClickListener {
@@ -69,6 +72,13 @@ class MainActivity : AppCompatActivity(), IMainView {
         val imgThumb = "https://www.serebii.net/pokemongo/pokemon/$formatedNumber.png"
 
         Glide.with(this).load(imgThumb).into(inflater.dialog_img_pokemon)
+
+        inflater.dialog_view_item.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                ConverterTypes.valueOf(pokemon.types[0].type.name).colorType
+            )
+        )
 
         inflater.dialog_txt_numero.text = "N° $formatedNumber"
         inflater.dialog_txt_nome.text = pokemon.name.capitalize()
@@ -104,7 +114,7 @@ class MainActivity : AppCompatActivity(), IMainView {
     private fun shareInfo(pokemon: Pokemon) {
         val types = arrayListOf<String>()
         val sendIntent = Intent()
-        if (pokemon.types.size > 1){
+        if (pokemon.types.size > 1) {
             types.add(pokemon.types[0].type.name)
             types.add(pokemon.types[1].type.name)
         } else types.add(pokemon.types[0].type.name)

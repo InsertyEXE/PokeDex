@@ -30,6 +30,10 @@ class PokemonAdapter(private val items: List<Pokemon>, private val onItemClick: 
 
                 val pokeTypeFirst = pokemon.types[0].type.name
 
+                itemView.view_item.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                    ConverterTypes.valueOf(pokeTypeFirst).colorType
+                ))
+
                 if (pokemon.types.size > 1) {
 
                     ConverterTypes.values().forEach {
