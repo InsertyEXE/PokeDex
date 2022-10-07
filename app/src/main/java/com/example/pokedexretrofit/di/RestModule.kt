@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val restModule = module {
 
-    single { providerRetrofit() }
     single { providerRetrofit().create(PokemonDexService::class.java) }
 }
 

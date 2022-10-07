@@ -1,6 +1,4 @@
 package com.example.pokedexretrofit
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -18,7 +16,6 @@ import com.example.pokedexretrofit.model.PokemonAdapter
 import kotlinx.android.synthetic.main.item_dialog_pokemon.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-
 
 class MainActivity : AppCompatActivity(), IMainView {
 
@@ -42,11 +39,12 @@ class MainActivity : AppCompatActivity(), IMainView {
             if (!pokemons.contains(it)) pokemons.add(it)
             pokemons.sortBy { pokemon -> pokemon.id }
             binding.rvDex.adapter = PokemonAdapter(pokemons) { pokemon -> openDialogPokemon(pokemon) }
-        }
 
+        }
 
         viewmodel.pokemonQuery.observe(this) { pokemonResult ->
             pokemons.clear()
+            binding.rvDex.adapter?.notifyDataSetChanged()
             pokemonResult?.let { pokemons.add(it) }
             if (pokemons.isNotEmpty()) binding.rvDex.adapter = PokemonAdapter(pokemons) { openDialogPokemon(it) }
         }
@@ -60,7 +58,6 @@ class MainActivity : AppCompatActivity(), IMainView {
         }
 
         binding.edtDex.addTextChangedListener { text -> if (text?.isEmpty() == true) viewmodel.listAllPokemon() }
-
     }
 
     private fun openDialogPokemon(pokemon: Pokemon) {
